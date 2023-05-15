@@ -1,9 +1,9 @@
-const blob = document.getElementById('blob');
+const blob = document.getElementById('blob')//gets the css element blob
 
-document.addEventListener('mousemove', event => {
+document.addEventListener('mousemove', event => { //adds a listener for mousemove
   const { clientX, clientY } = event;
 
-  blob.animate(
+  blob.animate( //moves blob to the mouse position
     {
       left: `${clientX}px`,
       top: `${clientY}px`,
@@ -12,22 +12,22 @@ document.addEventListener('mousemove', event => {
   );
 });
 
-const track = document.getElementById("image-track");
+const track = document.getElementById("image-track"); //gets the image track element
 
-const handleOnDown = e => track.dataset.mouseDownAt = e.clientX;
+const handleOnDown = e => track.dataset.mouseDownAt = e.clientX;  //finds position where the mouse is clicked down at
 
-const handleOnUp = () => {
+const handleOnUp = () => {  //when the m1 button is released the new percentage is saved and the mouseDownAt variable is reset to
   track.dataset.mouseDownAt = "0";  
   track.dataset.prevPercentage = track.dataset.percentage;
 }
 
 const handleOnMove = e => {
-  if(track.dataset.mouseDownAt === "0") return;
+  if(track.dataset.mouseDownAt === "0") return; //checks if mousedownat is 0 and retur
   
-  const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
+  const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX, //
         maxDelta = window.innerWidth / 2;
   
-  const percentage = (mouseDelta / maxDelta) * -100,
+  const percentage = (mouseDelta / maxDelta) * -100,  //calculates the new starting point for calculating the percantage
         nextPercentageUnconstrained = parseFloat(track.dataset.prevPercentage) + percentage,
         nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
   
@@ -37,14 +37,14 @@ const handleOnMove = e => {
     transform: `translate(${nextPercentage}%, -50%)`
   }, { duration: 1200, fill: "forwards" });
   
-  for(const image of track.getElementsByClassName("image")) {
+  for(const image of track.getElementsByClassName("image")) { //creates the parralax effect on the images
     image.animate({
-      objectPosition: `${100 + nextPercentage}% center`
+      objectPosition: `${100 + nextPercentage}% center` 
     }, { duration: 1200, fill: "forwards" });
   }
 }
 
-/* -- Had to add extra lines for touch events -- */
+//touch event handling, not sure 
 
 window.onmousedown = e => handleOnDown(e);
 
@@ -64,7 +64,7 @@ const navBtn = document.querySelector('#nav-btn');
 const navMenu = document.querySelector('#nav-menu');
 const menu = document.querySelector('#menu');
 
-navBtn.addEventListener('click', () => {
+navBtn.addEventListener('click', () => {  //simple button which shows a dropdown menu of links
   if (navMenu.classList.contains('show-menu')) {
     navMenu.classList.remove('show-menu');
     navMenu.classList.add('hide-menu');
