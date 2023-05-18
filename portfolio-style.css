@@ -92,11 +92,17 @@
     
     align-items: center;
   }
-.arrow{
+.right-arrow{
     top:40%;
     position: absolute;
     z-index: 1;
     right: 5%;
+}
+.left-arrow{
+  top:40%;
+  position: absolute;
+  z-index: 1;
+  left: 5%;
 }
 
  .nav-btn {
